@@ -14,7 +14,7 @@ public class UserDBHelper extends SQLiteOpenHelper
 
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "User.db";
-	private static final String TABLE_USER_NAME = "USER";
+	private static final String TABLE_USER_NAME = "USER";//유저 테이블
 	private static String DATABASE_ID = "";//database 사용자 이름
 	private static String DATABASE_PW = "";//database 사용자 비번
 	private static final String SQL_CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_USER_NAME + " (" + "USER TEXT, " + "PW TEXT" + ");";
@@ -42,17 +42,22 @@ public class UserDBHelper extends SQLiteOpenHelper
 
 	//디비 생성
 	//필요한 테이블 생성해
-	public void createDB(SQLiteDatabase db)
+	public void createDB()
 	{
 		Log.i(">>>>", "createDB");
-		//지웠다가 다시 만들어
-//		String drop = "DROP TABLE IF EXISTS " + TABLE_USER_NAME;
-//		db.execSQL(drop);
-		db.execSQL(SQL_CREATE_USER_TABLE);
+		onCreate(dbInstance.getWritableDatabase());
+	}
+
+	//초기화
+	public void resetDB(){
+		Log.i(">>>>", "resetDB");
+		String drop = "DROP TABLE IF EXISTS " + TABLE_USER_NAME;
+		SQLiteDatabase db = dbInstance.getWritableDatabase();
+		db.execSQL(drop);
 	}
 
 	//데이터 추가
-	public void insertDB(String tableName, String id)
+	public void insertDB(String tableName, String id, String pw)
 	{
 		Log.i(">>>>", "insertDB " + id);
 		SQLiteDatabase db = dbInstance.getWritableDatabase();
@@ -61,17 +66,34 @@ public class UserDBHelper extends SQLiteOpenHelper
 		db.execSQL(insertQuery, params);
 	}
 
-	public void selectDB(SQLiteDatabase db, String tableName, ContentValues row)
+	public String getID(){
+		String id = "";
+		SQLiteDatabase db = dbInstance.getWritableDatabase();
+		String getQuery = "SELECT USER, PW FROM " + TABLE_USER_NAME;
+		Cursor c = db.rawQuery(getQuery, null);
+		if(c == null){
+			Log.d(">>>", "DB 비어있어");
+		}else{
+			if(c.moveToNext()) {
+				Log.i(">>>>", "checkID 내용 " + c.getString(0));
+				Toast.makeText(mContext, "뭐가 있지?? " + c.getString(0) + " " + c.getString(1), Toast.LENGTH_SHORT).show();
+				return c.getString(0);
+			}
+		}
+		return "";
+	}
+
+	public void selectDB(String tableName, ContentValues row)
 	{
 
 	}
 
-	public void updateDB(SQLiteDatabase db, String tableName, ContentValues row)
+	public void updateDB(String tableName, ContentValues row)
 	{
 
 	}
 
-	public void deleteDB(SQLiteDatabase db, String tableName, ContentValues row)
+	public void deleteDB(String tableName, ContentValues row)
 	{
 
 	}
@@ -98,7 +120,7 @@ public class UserDBHelper extends SQLiteOpenHelper
 
 	public void setID(String id)
 	{
-		insertDB(TABLE_USER_NAME, id);
+		insertDB(TABLE_USER_NAME, id, null);
 	}
 
 	public void setPW(String pw)
@@ -110,7 +132,7 @@ public class UserDBHelper extends SQLiteOpenHelper
 	public void onCreate(SQLiteDatabase db)
 	{
 		Log.i(">>>>", "onCreate");
-		createDB(db);
+		db.execSQL(SQL_CREATE_USER_TABLE);
 	}
 
 	@Override
