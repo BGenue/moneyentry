@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dayLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvDay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="right|center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tvSpend"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="4" />
+
+    <TextView
+        android:id="@+id/tvSpend"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@color/spend"
+        android:autoSizeTextType="uniform"
+        android:gravity="right|center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tvEarn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDay"
+        app:layout_constraintVertical_weight="3" />
+
+    <TextView
+        android:id="@+id/tvEarn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@color/earn"
+        android:autoSizeTextType="uniform"
+        android:gravity="right|center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tvSave"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSpend"
+        app:layout_constraintVertical_weight="3" />
+
+    <TextView
+        android:id="@+id/tvSave"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@color/save"
+        android:autoSizeTextType="uniform"
+        android:gravity="right|center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEarn"
+        app:layout_constraintVertical_weight="3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

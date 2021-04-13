@@ -1,18 +1,18 @@
 package com.genue.android.moneyentry;
 
-public class DayData
+public class MonthData
 {
-	private int day = 0;//일
+	private int month = 0;//월
 	private int spend = 0;//지출
 	private int earn = 0;//수입
 	private int save = 0;//저축
 
-	DayData(int day){
-		this.day = day;
+	MonthData(int month){
+		this.month = month;
 	}
 
-	public void setDay(int day){
-		this.day = day;
+	public void setMonth(int month){
+		this.month = month;
 	}
 
 	public void setSpend(int spend){
@@ -27,8 +27,8 @@ public class DayData
 		this.save = save;
 	}
 
-	public String getDay(){
-		return day + "";
+	public String getMonth(){
+		return month + "";
 	}
 
 	public String getSpend(){
@@ -44,6 +44,6 @@ public class DayData
 	}
 
 	public String toString(){
-		return day + " " + spend + " " + earn + " " + save;
+		return month + " " + spend + " " + earn + " " + save;
 	}
 }
