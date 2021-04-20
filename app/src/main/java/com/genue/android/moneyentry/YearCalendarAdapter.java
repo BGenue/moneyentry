@@ -85,7 +85,7 @@ public class YearCalendarAdapter extends BaseAdapter
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);
 		TextView tvSave = convertView.findViewById(R.id.tvSave);
 		TextView tvEarn = convertView.findViewById(R.id.tvEarn);
-		tvMonth.setText(items[position].getMonth());
+		tvMonth.setText(items[position].getMonth()+"월");
 		//이번달 구분 해야해
 		if(items[position].getMonth().equals(month + "")){
 			tvMonth.setTextColor(Color.MAGENTA);

@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
 //	private final String TAG = getClass().getSimpleName();
 	private final String TAG = ">>>";
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
 	SQLiteDatabase userDatabase;
 
 	//광고
-	private AdView mAdView;
+//	private AdView mAdView;
 
 	//유저
 	private UserInfo user;
@@ -73,12 +73,15 @@ public class MainActivity extends AppCompatActivity
 		getTodayDate();
 
 		initDB();
-		initAd();
+//		initAd();
 		initUi();
 	}
 
 	private void initUi()
 	{
+		mAdView = findViewById(R.id.adView);
+		mAdView.loadAd(adRequest);
+
 		tvSummaryTitle = findViewById(R.id.summaryTitle);
 		setDateText(posi);
 		mSummaryText[0] = findViewById(R.id.summarySpend);
@@ -133,20 +136,20 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
-	private void initAd()
-	{
-		MobileAds.initialize(this, new OnInitializationCompleteListener()
-		{
-			@Override
-			public void onInitializationComplete(InitializationStatus initializationStatus)
-			{
-			}
-		});
-
-		mAdView = findViewById(R.id.adView);
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mAdView.loadAd(adRequest);
-	}
+//	protected void initAd()
+//	{
+//		MobileAds.initialize(this, new OnInitializationCompleteListener()
+//		{
+//			@Override
+//			public void onInitializationComplete(InitializationStatus initializationStatus)
+//			{
+//			}
+//		});
+//
+//		mAdView = findViewById(R.id.adView);
+//		AdRequest adRequest = new AdRequest.Builder().build();
+//		mAdView.loadAd(adRequest);
+//	}
 
 	private void initDB()
 	{
@@ -248,9 +251,12 @@ public class MainActivity extends AppCompatActivity
 				break;
 			case R.id.summaryTitle:
 				Toast.makeText(this, "내역 눌림", Toast.LENGTH_SHORT).show();
-				Intent goInsert = new Intent(this, CalendarActivity.class);
-				goInsert.putExtra("calendar", posi);
-				startActivity(goInsert);
+				Intent goCalendar = new Intent(this, CalendarActivity.class);
+				goCalendar.putExtra("calendar", posi);
+				goCalendar.putExtra("year", year);
+				goCalendar.putExtra("month", month);
+				goCalendar.putExtra("day", day);
+				startActivity(goCalendar);
 				break;
 		}
 	}
@@ -262,9 +268,9 @@ public class MainActivity extends AppCompatActivity
 		}else if(getSwipe == Define.SWIPE_RIGHT_TO_LEFT){
 			changeRight();
 		}else if(getSwipe == Define.SWIPE_NONE){
-			Intent goCalendar = new Intent(this, InsertActivity.class);
-			goCalendar.putExtra("type",pressType);
-			startActivity(goCalendar);
+			Intent goInsert = new Intent(this, InsertActivity.class);
+			goInsert.putExtra("type", pressType);
+			startActivity(goInsert);
 		}
 	}
 

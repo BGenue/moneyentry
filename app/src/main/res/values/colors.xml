@@ -7,6 +7,11 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="gray">#B1B1B1</color>
+    <color name="red">#FF0000</color>
+    <color name="redGray">#DDA7A7</color>
+    <color name="blackGray">#A5A5A5</color>
+
+
 
     <color name="spend">#E47A7A</color>
     <color name="earn">#7AA3E4</color>

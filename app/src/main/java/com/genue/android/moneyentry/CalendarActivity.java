@@ -20,7 +20,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.util.Calendar;
 
-public class CalendarActivity extends AppCompatActivity
+public class CalendarActivity extends BaseActivity
 {
 	GridView calendarView;
 	MonthCalendarAdapter monthCalendarAdapter;
@@ -42,51 +42,46 @@ public class CalendarActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
-		initAd();
+
+		mAdView = findViewById(R.id.adView);
+		mAdView.loadAd(adRequest);
 
 		calendarView = findViewById(R.id.calendarView);
 
 		Intent fromMain = getIntent();
-		int type = fromMain.getIntExtra("calendar", 0);
-		if(type == Define.SHOW_MONTH){
-			//월별 달력 보여줘
-			calenderType = 1;
-		}else{
-			//일별 달력 보여줘
-			calenderType = 0;
-		}
-		initCalendar();
-	}
+		calenderType = fromMain.getIntExtra("calendar", 0);
+		year = fromMain.getIntExtra("year", 0);
+		month = fromMain.getIntExtra("month", 0) - 1;
+		today = fromMain.getIntExtra("day", 0);
+		Log.d(">>>>", "캘린더 타입 " + calenderType);
 
-	private void initCalendar(){
 		tvMonth = findViewById(R.id.tvMonth);
-		Calendar calendar = Calendar.getInstance();
-		year = calendar.get(Calendar.YEAR);
-		month = calendar.get(Calendar.MONTH) + 1;
-		today = calendar.get(Calendar.DAY_OF_MONTH);
-		tvMonth.setText(year + "." + month + "." + today);
+		tvMonth.setText(year + "." + (month + 1) + "." + today);
 	}
 
-	private void initAd()
-	{
-		MobileAds.initialize(this, new OnInitializationCompleteListener()
-		{
-			@Override
-			public void onInitializationComplete(InitializationStatus initializationStatus)
-			{
-			}
-		});
-
-		mAdView = findViewById(R.id.adView);
-		mAdView.setAdListener(new AdListener(){
-			@Override
-			public void onAdLoaded(){
-				Log.d(">>>", "광고 로드 ");
-			}
-		});
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mAdView.loadAd(adRequest);
+	//원하는 날짜로 캘린더 셋팅
+	private void initCalendar(int year, int month, int day){
 	}
+
+//	private void initAd()
+//	{
+//		MobileAds.initialize(this, new OnInitializationCompleteListener()
+//		{
+//			@Override
+//			public void onInitializationComplete(InitializationStatus initializationStatus)
+//			{
+//			}
+//		});
+//
+//		mAdView.setAdListener(new AdListener(){
+//			@Override
+//			public void onAdLoaded(){
+//				Log.d(">>>", "광고 로드 ");
+//			}
+//		});
+//		AdRequest adRequest = new AdRequest.Builder().build();
+//		mAdView.loadAd(adRequest);
+//	}
 
 	@Override
 	protected void onResume()
@@ -98,7 +93,7 @@ public class CalendarActivity extends AppCompatActivity
 	@Override public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		//ui 값 알기위해
-		if(calenderType == 1){
+		if(calenderType == Define.SHOW_MONTH || calenderType == Define.SHOW_YEAR){
 			setYearCalendarView();
 		}else {
 			setMonthCalendarView();
@@ -108,7 +103,7 @@ public class CalendarActivity extends AppCompatActivity
 	public void setMonthCalendarView(){
 		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
 		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
-		monthCalendarAdapter = new MonthCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month - 1, today);
+		monthCalendarAdapter = new MonthCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month, today);
 		calendarView.setAdapter(monthCalendarAdapter);
 		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
@@ -121,9 +116,10 @@ public class CalendarActivity extends AppCompatActivity
 	}
 
 	public void setYearCalendarView(){
+		calendarView.setNumColumns(2);
 		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
 		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
-		yearCalendarAdapter = new YearCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month - 1);
+		yearCalendarAdapter = new YearCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month);
 		calendarView.setAdapter(yearCalendarAdapter);
 		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{

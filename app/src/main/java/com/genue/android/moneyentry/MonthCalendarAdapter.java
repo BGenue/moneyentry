@@ -1,5 +1,6 @@
 package com.genue.android.moneyentry;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 
@@ -32,9 +34,17 @@ public class MonthCalendarAdapter extends BaseAdapter
 	double row_height = 0;
 	int vertiSpace = 0;
 
+	int presentMonthStart = 0;
+	int presentMonthEnd = 0;
+
+	int redGray = 0;
+	int blackGray = 0;
 
 	public MonthCalendarAdapter(Context context, int parentHeight, int vertiSpace, int year, int month, int today)
 	{
+		redGray = ContextCompat.getColor(context, R.color.redGray);
+		blackGray = ContextCompat.getColor(context, R.color.blackGray);
+
 		mContext = context;
 		inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		Log.d(">>>>", "CalendarAdapter 그리드 뷰 높이 " + parentHeight);
@@ -65,8 +75,8 @@ public class MonthCalendarAdapter extends BaseAdapter
 	{
 		calendar.set(Calendar.DAY_OF_MONTH, 1);//1일 셋팅
 		int prevMonthEnd = getPrevMonth(year, month);
-		int presentMonthStart = calendar.get(Calendar.DAY_OF_WEEK) - 1;// 0 - 일요일 ~ 6 - 토요일
-		int presentMonthEnd = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		presentMonthStart = calendar.get(Calendar.DAY_OF_WEEK) - 1;// 0 - 일요일 ~ 6 - 토요일
+		presentMonthEnd = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
 		Log.d(">>>", prevMonthEnd + " " + presentMonthStart + " " + presentMonthEnd );
 
@@ -86,7 +96,7 @@ public class MonthCalendarAdapter extends BaseAdapter
 	//이전달 마지막 일
 	private int getPrevMonth(int year, int month){
 		Calendar c = (Calendar) calendar.clone();
-		c.set(year, month, 1);
+		c.set(year, (month - 1), 1);
 
 		return c.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
@@ -125,9 +135,17 @@ public class MonthCalendarAdapter extends BaseAdapter
 		tvDay.setText(items[position].getDay());
 		//주말 구분
 		if(position % 7 == 0 || position % 7 == 6){
-			tvDay.setTextColor(Color.RED);
-		}else{
-			tvDay.setTextColor(Color.BLACK);
+			if(position < presentMonthStart || position >= presentMonthStart + presentMonthEnd) {
+				tvDay.setTextColor(redGray);
+			} else {
+				tvDay.setTextColor(Color.RED);
+			}
+		} else{
+			if(position < presentMonthStart || position > presentMonthStart + presentMonthEnd){
+				tvDay.setTextColor(blackGray);
+			} else {
+				tvDay.setTextColor(Color.BLACK);
+			}
 		}
 		//오늘 구분
 		if(items[position].getDay().equals(today + "")){
