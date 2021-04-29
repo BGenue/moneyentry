@@ -40,6 +40,7 @@ public class CalendarActivity extends BaseActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		Log.d(">>>", "oncreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
 
@@ -91,6 +92,7 @@ public class CalendarActivity extends BaseActivity
 	}
 
 	@Override public void onWindowFocusChanged(boolean hasFocus) {
+		Log.d(">>>", "onwindowfocuschanged");
 		super.onWindowFocusChanged(hasFocus);
 		//ui 값 알기위해
 		if(calenderType == Define.SHOW_MONTH || calenderType == Define.SHOW_YEAR){
