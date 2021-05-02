@@ -34,4 +34,5 @@ dependencies {
 
 //  광고
     implementation 'com.google.android.gms:play-services-ads:19.8.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 }

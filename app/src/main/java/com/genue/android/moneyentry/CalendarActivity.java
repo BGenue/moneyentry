@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -22,7 +23,7 @@ import java.util.Calendar;
 
 public class CalendarActivity extends BaseActivity
 {
-	GridView calendarView;
+	RecyclerView calendarView;
 	MonthCalendarAdapter monthCalendarAdapter;
 	YearCalendarAdapter yearCalendarAdapter;
 
@@ -45,7 +46,7 @@ public class CalendarActivity extends BaseActivity
 		setContentView(R.layout.activity_calendar);
 
 		mAdView = findViewById(R.id.adView);
-		mAdView.loadAd(adRequest);
+		initAd(mAdView);
 
 		calendarView = findViewById(R.id.calendarView);
 
@@ -96,40 +97,44 @@ public class CalendarActivity extends BaseActivity
 		super.onWindowFocusChanged(hasFocus);
 		//ui 값 알기위해
 		if(calenderType == Define.SHOW_MONTH || calenderType == Define.SHOW_YEAR){
-			setYearCalendarView();
+//			setYearCalendarView();
 		}else {
-			setMonthCalendarView();
+//			setMonthCalendarView();
 		}
 	}
 
-	public void setMonthCalendarView(){
-		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
-		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
-		monthCalendarAdapter = new MonthCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month, today);
-		calendarView.setAdapter(monthCalendarAdapter);
-		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
+//	public void setMonthCalendarView(){
+//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
+//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
+//		monthCalendarAdapter = new MonthCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month, today);
+//		calendarView.setAdapter(monthCalendarAdapter);
+//		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+//		{
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+//			{
+//				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//	}
+//
+//	public void setYearCalendarView(){
+//		calendarView.setNumColumns(2);
+//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
+//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
+//		yearCalendarAdapter = new YearCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month);
+//		calendarView.setAdapter(yearCalendarAdapter);
+//		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+//		{
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+//			{
+//				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//	}
 
-	public void setYearCalendarView(){
-		calendarView.setNumColumns(2);
-		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
-		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
-		yearCalendarAdapter = new YearCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month);
-		calendarView.setAdapter(yearCalendarAdapter);
-		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
-			}
-		});
+	public void setCalendarList(){
+		Calendar mCalendar = Calendar.getInstance();
 	}
 }

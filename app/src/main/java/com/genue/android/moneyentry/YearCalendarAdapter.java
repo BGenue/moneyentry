@@ -79,7 +79,8 @@ public class YearCalendarAdapter extends BaseAdapter
 	{
 		if(convertView == null) {
 			convertView = inflater.inflate(R.layout.calendar_year_item, null);
-			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
+//			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
+			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 		TextView tvMonth = convertView.findViewById(R.id.tvMonth);
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);

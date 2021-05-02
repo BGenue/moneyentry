@@ -126,7 +126,8 @@ public class MonthCalendarAdapter extends BaseAdapter
 	{
 		if(convertView == null) {
 			convertView = inflater.inflate(R.layout.calendar_month_item, null);
-			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
+//			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
+			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 		TextView tvDay = convertView.findViewById(R.id.tvDay);
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);

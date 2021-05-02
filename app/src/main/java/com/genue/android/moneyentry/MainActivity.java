@@ -6,15 +6,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -34,13 +38,14 @@ public class MainActivity extends BaseActivity
 	SQLiteDatabase userDatabase;
 
 	//광고
-//	private AdView mAdView;
+	private AdView mAdView;
 
 	//유저
 	private UserInfo user;
 
 	//ui
-	private ConstraintLayout clBaseLayout;
+	private ConstraintLayout baseLayout;
+	private FrameLayout adViewLayout;
 	private TextView tvSummaryTitle;
 	private TextView[] mSummaryText = new TextView[4];
 	private int touched = -1;
@@ -68,19 +73,21 @@ public class MainActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mAdView = findViewById(R.id.adView);
+		initAd(mAdView);
+
 		user = UserInfo.createUser();
 
 		getTodayDate();
 
 		initDB();
-//		initAd();
 		initUi();
 	}
 
 	private void initUi()
 	{
-		mAdView = findViewById(R.id.adView);
-		mAdView.loadAd(adRequest);
+//		mAdView = findViewById(R.id.adView);
+//		mAdView.loadAd(adRequest);
 
 		tvSummaryTitle = findViewById(R.id.summaryTitle);
 		setDateText(posi);
@@ -136,8 +143,8 @@ public class MainActivity extends BaseActivity
 		}
 	}
 
-//	protected void initAd()
-//	{
+	protected void initAd()
+	{
 //		MobileAds.initialize(this, new OnInitializationCompleteListener()
 //		{
 //			@Override
@@ -149,7 +156,7 @@ public class MainActivity extends BaseActivity
 //		mAdView = findViewById(R.id.adView);
 //		AdRequest adRequest = new AdRequest.Builder().build();
 //		mAdView.loadAd(adRequest);
-//	}
+	}
 
 	private void initDB()
 	{
