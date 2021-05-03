@@ -1,6 +1,5 @@
 package com.genue.android.moneyentry;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -42,8 +41,8 @@ public class MonthCalendarAdapter extends BaseAdapter
 
 	public MonthCalendarAdapter(Context context, int parentHeight, int vertiSpace, int year, int month, int today)
 	{
-		redGray = ContextCompat.getColor(context, R.color.redGray);
-		blackGray = ContextCompat.getColor(context, R.color.blackGray);
+		redGray = ContextCompat.getColor(context, R.color.redGray);//이전, 다음달 주말 색
+		blackGray = ContextCompat.getColor(context, R.color.blackGray);//이전, 다음달 평일 색
 
 		mContext = context;
 		inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -125,32 +124,32 @@ public class MonthCalendarAdapter extends BaseAdapter
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		if(convertView == null) {
-			convertView = inflater.inflate(R.layout.calendar_month_item, null);
-//			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
-			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+			convertView = inflater.inflate(R.layout.calendar_item, null);
+			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
 		}
-		TextView tvDay = convertView.findViewById(R.id.tvDay);
+		TextView tvNum = convertView.findViewById(R.id.tvNum);
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);
 		TextView tvSave = convertView.findViewById(R.id.tvSave);
 		TextView tvEarn = convertView.findViewById(R.id.tvEarn);
-		tvDay.setText(items[position].getDay());
+		tvNum.setText(items[position].getDay());
+		Log.d(">>>", "position " + position + " presentMonthStart " + presentMonthStart + " presentMonthStart + presentMonthEnd " + (presentMonthStart + presentMonthEnd));
 		//주말 구분
 		if(position % 7 == 0 || position % 7 == 6){
 			if(position < presentMonthStart || position >= presentMonthStart + presentMonthEnd) {
-				tvDay.setTextColor(redGray);
+				tvNum.setTextColor(redGray);//앞뒤달 주말
 			} else {
-				tvDay.setTextColor(Color.RED);
+				tvNum.setTextColor(Color.RED);// 이번달 주말
 			}
 		} else{
-			if(position < presentMonthStart || position > presentMonthStart + presentMonthEnd){
-				tvDay.setTextColor(blackGray);
+			if(position < presentMonthStart || position >= presentMonthStart + presentMonthEnd){
+				tvNum.setTextColor(blackGray);//앞뒤달 평일
 			} else {
-				tvDay.setTextColor(Color.BLACK);
+				tvNum.setTextColor(Color.BLACK);//이번달 평일
 			}
 		}
 		//오늘 구분
-		if(items[position].getDay().equals(today + "")){
-			tvDay.setTextColor(Color.MAGENTA);
+		if(position < presentMonthStart + presentMonthEnd && items[position].getDay().equals(today + "")){
+			tvNum.setTextColor(Color.MAGENTA);
 		}
 		tvSpend.setText(items[position].getSpend());
 		tvSave.setText(items[position].getSave());

@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.ads.AdListener;
@@ -19,11 +22,12 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CalendarActivity extends BaseActivity
 {
-	RecyclerView calendarView;
+	GridView calendarView;
 	MonthCalendarAdapter monthCalendarAdapter;
 	YearCalendarAdapter yearCalendarAdapter;
 
@@ -34,7 +38,7 @@ public class CalendarActivity extends BaseActivity
 	//광고
 	private AdView mAdView;
 
-	private TextView tvMonth;
+	private TextView tvNum;
 
 	private int calenderType = 0;
 
@@ -57,8 +61,8 @@ public class CalendarActivity extends BaseActivity
 		today = fromMain.getIntExtra("day", 0);
 		Log.d(">>>>", "캘린더 타입 " + calenderType);
 
-		tvMonth = findViewById(R.id.tvMonth);
-		tvMonth.setText(year + "." + (month + 1) + "." + today);
+		tvNum = findViewById(R.id.tvNum);
+		tvNum.setText(year + "." + (month + 1) + "." + today);
 	}
 
 	//원하는 날짜로 캘린더 셋팅
@@ -95,46 +99,43 @@ public class CalendarActivity extends BaseActivity
 	@Override public void onWindowFocusChanged(boolean hasFocus) {
 		Log.d(">>>", "onwindowfocuschanged");
 		super.onWindowFocusChanged(hasFocus);
-		//ui 값 알기위해
+
+		//ui값 확인
 		if(calenderType == Define.SHOW_MONTH || calenderType == Define.SHOW_YEAR){
-//			setYearCalendarView();
+			setYearCalendarView();
 		}else {
-//			setMonthCalendarView();
+			setMonthCalendarView();
 		}
 	}
 
-//	public void setMonthCalendarView(){
-//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
-//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
-//		monthCalendarAdapter = new MonthCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month, today);
-//		calendarView.setAdapter(monthCalendarAdapter);
-//		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//		{
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-//			{
-//				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
-//			}
-//		});
-//	}
-//
-//	public void setYearCalendarView(){
-//		calendarView.setNumColumns(2);
-//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
-//		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
-//		yearCalendarAdapter = new YearCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month);
-//		calendarView.setAdapter(yearCalendarAdapter);
-//		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//		{
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-//			{
-//				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
-//			}
-//		});
-//	}
+	public void setMonthCalendarView(){
+		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
+		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
+		monthCalendarAdapter = new MonthCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month, today);
+		calendarView.setAdapter(monthCalendarAdapter);
+		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 
-	public void setCalendarList(){
-		Calendar mCalendar = Calendar.getInstance();
+	public void setYearCalendarView(){
+		calendarView.setNumColumns(2);
+		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 높이 " + calendarView.getHeight());
+		Log.d(">>>>", " onWindowFocusChanged 그리드 뷰 가로 스페이스 " + calendarView.getVerticalSpacing());
+		yearCalendarAdapter = new YearCalendarAdapter(this, calendarView.getHeight(), calendarView.getVerticalSpacing(), year, month);
+		calendarView.setAdapter(yearCalendarAdapter);
+		calendarView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 }

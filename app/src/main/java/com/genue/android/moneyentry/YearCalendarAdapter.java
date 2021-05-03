@@ -78,20 +78,19 @@ public class YearCalendarAdapter extends BaseAdapter
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		if(convertView == null) {
-			convertView = inflater.inflate(R.layout.calendar_year_item, null);
-//			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
-			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+			convertView = inflater.inflate(R.layout.calendar_item, null);
+			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
 		}
-		TextView tvMonth = convertView.findViewById(R.id.tvMonth);
+		TextView tvNum = convertView.findViewById(R.id.tvNum);
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);
 		TextView tvSave = convertView.findViewById(R.id.tvSave);
 		TextView tvEarn = convertView.findViewById(R.id.tvEarn);
-		tvMonth.setText(items[position].getMonth()+"월");
+		tvNum.setText(items[position].getMonth()+"월");
 		//이번달 구분 해야해
 		if(items[position].getMonth().equals(month + "")){
-			tvMonth.setTextColor(Color.MAGENTA);
+			tvNum.setTextColor(Color.MAGENTA);
 		}else{
-			tvMonth.setTextColor(Color.BLACK);
+			tvNum.setTextColor(Color.BLACK);
 		}
 		tvSpend.setText(items[position].getSpend());
 		tvSave.setText(items[position].getSave());
