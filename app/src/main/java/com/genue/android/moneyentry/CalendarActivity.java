@@ -99,7 +99,11 @@ public class CalendarActivity extends BaseActivity
 	@Override public void onWindowFocusChanged(boolean hasFocus) {
 		Log.d(">>>", "onwindowfocuschanged");
 		super.onWindowFocusChanged(hasFocus);
+		if(hasFocus)
+			showCalendar();
+	}
 
+	private void showCalendar(){
 		//ui값 확인
 		if(calenderType == Define.SHOW_MONTH || calenderType == Define.SHOW_YEAR){
 			setYearCalendarView();
@@ -134,8 +138,23 @@ public class CalendarActivity extends BaseActivity
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
+				calendarView.setSelection(position);
 				Toast.makeText(CalendarActivity.this, "눌림 " + position, Toast.LENGTH_SHORT).show();
 			}
 		});
+	}
+
+	public void onClick(View v){
+		switch(v.getId()){
+			case R.id.prevMonth:
+				month -= 1;
+				showCalendar();
+				break;
+
+			case R.id.nextMonth:
+				month += 1;
+				showCalendar();
+				break;
+		}
 	}
 }
