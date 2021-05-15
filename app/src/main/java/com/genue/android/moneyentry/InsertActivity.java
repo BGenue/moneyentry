@@ -30,10 +30,10 @@ public class InsertActivity extends AppCompatActivity
 	EditText etExplain;
 	EditText startYear;
 	EditText startMonth;
-	EditText startDay;
+//	EditText startDay;
 	EditText endYear;
 	EditText endMonth;
-	EditText endDay;
+//	EditText endDay;
 	final String DEFAULT_TEXT = "₩   ";
 	final int DEFAULT_TEXT_LENGTH = 4;
 	boolean isChanging = false;
@@ -122,10 +122,10 @@ public class InsertActivity extends AppCompatActivity
 		etExplain = findViewById(R.id.etExplain);
 		startYear = findViewById(R.id.startYear);
 		startMonth = findViewById(R.id.startMonth);
-		startDay = findViewById(R.id.startDay);
+//		startDay = findViewById(R.id.startDay);
 		endYear = findViewById(R.id.endYear);
 		endMonth = findViewById(R.id.endMonth);
-		endDay = findViewById(R.id.endDay);
+//		endDay = findViewById(R.id.endDay);
 
 		rgCategory = findViewById(R.id.rgCategory);
 		rbEarn = findViewById(R.id.rbEarn);
@@ -300,10 +300,10 @@ public class InsertActivity extends AppCompatActivity
 				result.putExtra("amount", etAmount.getText().toString());
 				result.putExtra("startYear", startYear.getText().toString());
 				result.putExtra("startMonth", startMonth.getText().toString());
-				result.putExtra("startDay", startDay.getText().toString());
+//				result.putExtra("startDay", startDay.getText().toString());
 				result.putExtra("endYear", endYear.getText().toString());
 				result.putExtra("endMonth", endMonth.getText().toString());
-				result.putExtra("endDay", endDay.getText().toString());
+//				result.putExtra("endDay", endDay.getText().toString());
 
 				setResult(Define.RESULT_CODE_CONFIRM, result);
 				finish();

@@ -71,23 +71,17 @@ public class MainActivity extends BaseActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		mAdView = findViewById(R.id.adView);
-		initAd(mAdView);
 
 		user = UserInfo.createUser();
-
-		getTodayDate();
-
 		initDB();
-		initUi();
 	}
 
 	private void initUi()
 	{
-//		mAdView = findViewById(R.id.adView);
-//		mAdView.loadAd(adRequest);
+		mAdView = findViewById(R.id.adView);
+		initAd(mAdView);
+		//		mAdView.loadAd(adRequest);
+		//		mAdView = findViewById(R.id.adView);
 
 		tvSummaryTitle = findViewById(R.id.summaryTitle);
 		setDateText(posi);
@@ -164,18 +158,37 @@ public class MainActivity extends BaseActivity
 		userDBHelper = UserDBHelper.getInstance(this);
 		userDBHelper.resetDB();
 		userDBHelper.createDB();
-		changeBtn();
+		checkFirst();
 	}
 
-	public void changeBtn()
+	//첫 사용인지 확인
+	private void checkFirst()
 	{
 		user.setNickname(userDBHelper.checkID());
-		if(user.getNickname() != null) {
+		user.setNickname("홍길동");
+		if(user.hasNickname()) {
 			Toast.makeText(this, "사용자 있음 " + user.getNickname(), Toast.LENGTH_SHORT).show();
+
+			if(user.isMonthlyEarnEmpty()){
+				Toast.makeText(this, "용돈/월급 입력해야해", Toast.LENGTH_SHORT).show();
+			} else if(user.isMonthlySaveEmpty()){
+				Toast.makeText(this, "정기 저축 입력해야해", Toast.LENGTH_SHORT).show();
+			} else if(user.isMonthlySpendEmpty()){
+				Toast.makeText(this, "정기 소비 입력해야해", Toast.LENGTH_SHORT).show();
+			}
+			startApp();
 		}
 		else {
 			Toast.makeText(this, "사용자 없음 " + user.getNickname(), Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	private void startApp(){
+		setContentView(R.layout.activity_main);
+
+		getTodayDate();
+
+		initUi();
 	}
 
 	public void getTodayDate()

@@ -36,6 +36,11 @@
             android:name=".InsertActivity"
             android:hardwareAccelerated="true">
 <!--            android:theme="@style/DialogTheme" -->
+        </activity>
+
+        <activity
+            android:name=".UserInfoActivity"
+            android:hardwareAccelerated="true">
 
         </activity>
     </application>

@@ -9,9 +9,9 @@ public class UserInfo
 {
 	private String nickname;
 	private String password;
-	private HashMap monthlyEarn = null;
-	private HashMap monthlySave = null;
-	private HashMap monthlySpend = null;
+	private HashMap monthlyEarn;
+	private HashMap monthlySave;
+	private HashMap monthlySpend;
 
 	private static UserInfo USER;
 
@@ -26,17 +26,18 @@ public class UserInfo
 
 	private UserInfo()
 	{
-		nickname = "";
+		nickname = "홍길동";
 		password = "";
+		monthlyEarn = new HashMap();
+		monthlySave = new HashMap();
+		monthlySpend = new HashMap();
 	}
 
-	public void setNickname(String nickname){
-		this.nickname = nickname;
-	}
+	public void setNickname(String nickname) { this.nickname = nickname; }
 
-	public String getNickname(){
-		return nickname;
-	}
+	public String getNickname() { return nickname; }
+
+	public boolean hasNickname() { return !nickname.isEmpty(); }
 
 	public void setPassword(String password)
 	{
@@ -58,15 +59,16 @@ public class UserInfo
 		return monthlyEarn;
 	}
 
-	public void setMonthlySave(int key, int value)
-	{
-		this.monthlySave.put(key, value);
-	}
+	public boolean isMonthlyEarnEmpty() { return monthlyEarn.isEmpty(); }
+
+	public void setMonthlySave(int key, int value) { this.monthlySave.put(key, value); }
 
 	public HashMap getMonthlySave()
 	{
 		return monthlySave;
 	}
+
+	public boolean isMonthlySaveEmpty() { return monthlySave.isEmpty(); }
 
 	public void setMonthlySpend(int key, int value)
 	{
@@ -77,4 +79,6 @@ public class UserInfo
 	{
 		return monthlySpend;
 	}
+
+	public boolean isMonthlySpendEmpty() { return monthlySpend.isEmpty(); }
 }

@@ -100,21 +100,21 @@ public class UserDBHelper extends SQLiteOpenHelper
 
 	//user 테이블 id 받아와
 	public String checkID()
-	{
-		Log.i(">>>>", "checkID");
-		SQLiteDatabase db = dbInstance.getReadableDatabase();
-		String SQL_GET_ID = "SELECT USER FROM " + TABLE_USER_NAME;
-		Cursor c = db.rawQuery(SQL_GET_ID, null);
-		if(c == null) {
-			Toast.makeText(mContext, "아무것도 없어", Toast.LENGTH_SHORT).show();
-		}
-		else {
-			if(c.moveToNext()) {
-				Log.i(">>>>", "checkID 내용 " + c.getString(0));
-				Toast.makeText(mContext, "뭐가 있지?? " + c.getString(0), Toast.LENGTH_SHORT).show();
-				return c.getString(0);
+		{
+			Log.i(">>>>", "checkID");
+			SQLiteDatabase db = dbInstance.getReadableDatabase();
+			String SQL_GET_ID = "SELECT USER FROM " + TABLE_USER_NAME;
+			Cursor c = db.rawQuery(SQL_GET_ID, null);
+			if(c == null) {
+				Toast.makeText(mContext, "아무것도 없어", Toast.LENGTH_SHORT).show();
 			}
-		}
+			else {
+				if(c.moveToNext()) {
+					Log.i(">>>>", "checkID 내용 " + c.getString(0));
+					Toast.makeText(mContext, "뭐가 있지?? " + c.getString(0), Toast.LENGTH_SHORT).show();
+					return c.getString(0);
+				}
+			}
 		return null;
 	}
 
