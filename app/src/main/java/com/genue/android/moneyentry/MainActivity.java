@@ -169,12 +169,12 @@ public class MainActivity extends BaseActivity
 
 	public void changeBtn()
 	{
-		user.id = userDBHelper.checkID();
-		if(user.id != null) {
-			Toast.makeText(this, "사용자 있음 " + user.id, Toast.LENGTH_SHORT).show();
+		user.setNickname(userDBHelper.checkID());
+		if(user.getNickname() != null) {
+			Toast.makeText(this, "사용자 있음 " + user.getNickname(), Toast.LENGTH_SHORT).show();
 		}
 		else {
-			Toast.makeText(this, "사용자 없음 " + user.id, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "사용자 없음 " + user.getNickname(), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -247,14 +247,21 @@ public class MainActivity extends BaseActivity
 				Toast.makeText(this, "잔고 눌림", Toast.LENGTH_SHORT).show();
 				checkSwipe(isSwipe, Define.PRESS_BALANCE);
 				break;
-			case R.id.monthlyEarn:
+			case R.id.tvMonthlyEarn:
 				Toast.makeText(this, "월급/용돈 눌림", Toast.LENGTH_SHORT).show();
+				goInsert(Define.PRESS_MONTHLY_EARN);
 				break;
-			case R.id.monthlySave:
+			case R.id.tvMonthlySave:
 				Toast.makeText(this, "정기 저축 눌림", Toast.LENGTH_SHORT).show();
+				goInsert(Define.PRESS_MONTHLY_SAVE);
 				break;
-			case R.id.totalBalance:
+			case R.id.tvMonthlySpend:
+				Toast.makeText(this, "정기 소비 눌림", Toast.LENGTH_SHORT).show();
+				goInsert(Define.PRESS_MONTHLY_SPEND);
+				break;
+			case R.id.tvTotalBalance:
 				Toast.makeText(this, "잔액 눌림", Toast.LENGTH_SHORT).show();
+				goInsert(Define.PRESS_TOTAL_BALANCE);
 				break;
 			case R.id.summaryTitle:
 				Toast.makeText(this, "내역 눌림", Toast.LENGTH_SHORT).show();
@@ -275,9 +282,26 @@ public class MainActivity extends BaseActivity
 		}else if(getSwipe == Define.SWIPE_RIGHT_TO_LEFT){
 			changeRight();
 		}else if(getSwipe == Define.SWIPE_NONE){
-			Intent goInsert = new Intent(this, InsertActivity.class);
-			goInsert.putExtra("type", pressType);
-			startActivity(goInsert);
+			goInsert(pressType);
+		}
+	}
+
+	public void goInsert(int pressType){
+		Intent goInsert = new Intent(this, InsertActivity.class);
+		goInsert.putExtra("type", pressType);
+		startActivityForResult(goInsert, Define.REQUEST_CODE_INSERT);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if(requestCode == Define.REQUEST_CODE_INSERT){
+			if(resultCode == Define.RESULT_CODE_CONFIRM){
+
+			} else if(resultCode == Define.RESULT_CODE_CANCEL){
+
+			}
 		}
 	}
 

@@ -9,12 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:fullBackupContent="false"
         android:hardwareAccelerated="true">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/appId"/>
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +27,7 @@
 
         <activity
             android:name=".CalendarActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:hardwareAccelerated="true">
 
         </activity>
@@ -32,6 +35,7 @@
         <activity
             android:name=".InsertActivity"
             android:hardwareAccelerated="true">
+<!--            android:theme="@style/DialogTheme" -->
 
         </activity>
     </application>

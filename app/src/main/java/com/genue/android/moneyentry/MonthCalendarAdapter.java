@@ -2,13 +2,16 @@ package com.genue.android.moneyentry;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
@@ -38,6 +41,8 @@ public class MonthCalendarAdapter extends BaseAdapter
 
 	int redGray = 0;
 	int blackGray = 0;
+
+	int selectedPos = -1;
 
 	public MonthCalendarAdapter(Context context, int parentHeight, int vertiSpace, int year, int month, int today)
 	{
@@ -120,6 +125,7 @@ public class MonthCalendarAdapter extends BaseAdapter
 		return 0;
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
@@ -127,6 +133,36 @@ public class MonthCalendarAdapter extends BaseAdapter
 			convertView = inflater.inflate(R.layout.calendar_item, null);
 			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
 		}
+
+//		convertView.setOnTouchListener(new View.OnTouchListener()
+//		{
+//			@Override
+//			public boolean onTouch(View view, MotionEvent motionEvent)
+//			{
+//				Log.d(">>>", " onTouch " + motionEvent.getAction());
+//				if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+//					Log.d(">>>", "눌림");
+//					view.setBackground(mContext.getDrawable(R.drawable.calendar_item_clicked));
+//				} else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+//					Log.d(">>>", "뗌");
+//					view.setBackground(mContext.getDrawable(R.drawable.calendar_item_unclicked));
+//				}
+//				return false;
+//			}
+//		});
+//
+//		convertView.setOnClickListener(new View.OnClickListener()
+//		{
+//			@Override
+//			public void onClick(View view)
+//			{
+//			}
+//		});
+
+//		convertView.setBackground(mContext.getDrawable(R.drawable.calendar_item_click_event));
+		convertView.setBackground(mContext.getDrawable(R.drawable.ripple_effect));
+//		convertView.setBackgroundColor(mContext.getColor(R.color.white));
+
 		TextView tvNum = convertView.findViewById(R.id.tvNum);
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);
 		TextView tvSave = convertView.findViewById(R.id.tvSave);
@@ -147,9 +183,10 @@ public class MonthCalendarAdapter extends BaseAdapter
 				tvNum.setTextColor(Color.BLACK);//이번달 평일
 			}
 		}
-		//오늘 구분
+		//오늘
 		if(position < presentMonthStart + presentMonthEnd && items[position].getDay().equals(today + "")){
 			tvNum.setTextColor(Color.MAGENTA);
+			convertView.setBackground(mContext.getDrawable(R.drawable.today_ripple_effect));
 		}
 		tvSpend.setText(items[position].getSpend());
 		tvSave.setText(items[position].getSave());

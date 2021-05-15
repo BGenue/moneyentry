@@ -16,7 +16,7 @@
         app:layout_constraintVertical_weight="1">
 
         <TextView
-            android:id="@+id/monthlyEarn"
+            android:id="@+id/tvMonthlyEarn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:autoSizeMaxTextSize="25sp"
@@ -25,13 +25,13 @@
             android:onClick="onClick"
             android:text="월급/용돈"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/monthlySave"
+            app:layout_constraintBottom_toTopOf="@+id/tvMonthlySave"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/monthlySave"
+            android:id="@+id/tvMonthlySave"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:autoSizeMaxTextSize="25sp"
@@ -40,13 +40,13 @@
             android:onClick="onClick"
             android:text="정기 저축"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/totalBalance"
+            app:layout_constraintBottom_toTopOf="@+id/tvTotalBalance"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthlyEarn" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMonthlyEarn" />
 
         <TextView
-            android:id="@+id/totalBalance"
+            android:id="@+id/tvTotalBalance"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:autoSizeMaxTextSize="25sp"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthlySave" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMonthlySave" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

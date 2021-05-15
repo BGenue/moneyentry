@@ -2,138 +2,163 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/baseLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/baseLayout"
+    android:background="@color/white"
     tools:context=".MainActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomLayout">
+        app:layout_constraintVertical_weight="1">
+
         <TextView
-            android:id="@+id/monthlyEarn"
+            android:id="@+id/tvMonthlyEarn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="월급/용돈"
             android:autoSizeMaxTextSize="25sp"
             android:autoSizeTextType="uniform"
+            android:background="@drawable/ripple_effect"
             android:gravity="center"
-            android:textColor="@color/black"
             android:onClick="onClick"
+            android:text="월급/용돈 설정"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/tvMonthlySave"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/monthlySave"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/monthlySave"
+            android:id="@+id/tvMonthlySave"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="정기 저축"
             android:autoSizeMaxTextSize="25sp"
             android:autoSizeTextType="uniform"
+            android:background="@drawable/ripple_effect"
             android:gravity="center"
-            android:textColor="@color/black"
             android:onClick="onClick"
+            android:text="정기 저축 설정"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/tvMonthlySpend"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthlyEarn"
-            app:layout_constraintBottom_toTopOf="@+id/totalBalance"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvMonthlyEarn" />
         <TextView
-            android:id="@+id/totalBalance"
+            android:id="@+id/tvMonthlySpend"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="잔액"
             android:autoSizeMaxTextSize="25sp"
             android:autoSizeTextType="uniform"
+            android:background="@drawable/ripple_effect"
             android:gravity="center"
-            android:textColor="@color/black"
             android:onClick="onClick"
+            android:text="정기 소비 설정"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/tvTotalBalance"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthlySave"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvMonthlySave" />
+
+        <TextView
+            android:id="@+id/tvTotalBalance"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="25sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/ripple_effect"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="잔액 설정"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMonthlySpend" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="3"
+        app:layout_constraintBottom_toTopOf="@+id/adViewLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headLayout"
-        app:layout_constraintBottom_toTopOf="@+id/adViewLayout">
+        app:layout_constraintVertical_weight="3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomLeftLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/bottomCenterLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/leftBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u003c"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:onClick="onClick"
+                android:background="@drawable/ripple_effect"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="onClick"
+                android:text="\u003c"
+                android:textColor="@color/black"
+                android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomCenterLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/bottomLeftLayout"
             app:layout_constraintRight_toLeftOf="@+id/bottomRightLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/summaryTitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="일별 내역"
                 android:autoSizeMaxTextSize="30sp"
                 android:autoSizeTextType="uniform"
-                android:textColor="@color/black"
-                android:gravity="center"
+                android:background="@drawable/ripple_effect"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
                 android:onClick="onClick"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="일별 내역"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/summarySpend"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/summarySpend"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/summarySpend"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="지출"
                 android:autoSizeMaxTextSize="30sp"
                 android:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:textColor="@color/black"
+                android:background="@drawable/ripple_effect"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
                 android:onClick="onClick"
-                app:layout_constraintTop_toBottomOf="@+id/summaryTitle"
+                android:text="지출"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/summaryEarn"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/summaryEarn"/>
+                app:layout_constraintTop_toBottomOf="@+id/summaryTitle" />
 
             <TextView
                 android:id="@+id/summaryEarn"
@@ -141,12 +166,12 @@
                 android:layout_height="0dp"
                 android:autoSizeMaxTextSize="30sp"
                 android:autoSizeTextType="uniform"
+                android:background="@drawable/ripple_effect"
+                android:clickable="true"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:text="수입"
                 android:textColor="@color/black"
-                android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="onClick"
                 app:layout_constraintBottom_toTopOf="@+id/summarySave"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -157,59 +182,59 @@
                 android:id="@+id/summarySave"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="저축"
                 android:autoSizeMaxTextSize="30sp"
                 android:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:textColor="@color/black"
+                android:background="@drawable/ripple_effect"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
                 android:onClick="onClick"
-                app:layout_constraintTop_toBottomOf="@+id/summaryEarn"
+                android:text="저축"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/summaryBalance"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/summaryBalance"/>
+                app:layout_constraintTop_toBottomOf="@+id/summaryEarn" />
 
             <TextView
                 android:id="@+id/summaryBalance"
                 android:layout_width="match_parent"
-                android:text="잔액"
                 android:layout_height="0dp"
                 android:autoSizeMaxTextSize="30sp"
                 android:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:textColor="@color/black"
+                android:background="@drawable/ripple_effect"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                android:onClick="onClick"
-                app:layout_constraintTop_toBottomOf="@+id/summarySave"
+                android:gravity="center"
+                android:text="잔액"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/summarySave" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomRightLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/bottomCenterLayout"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/rightBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u003e"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:onClick="onClick"
+                android:background="@drawable/ripple_effect"
                 android:clickable="true"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="onClick"
+                android:text="\u003e"
+                android:textColor="@color/black"
+                android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -218,19 +243,18 @@
         android:id="@+id/adViewLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ad_height"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
+        app:layout_constraintTop_toBottomOf="@+id/bottomLayout">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/testAd">
-        </com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/testAd"></com.google.android.gms.ads.AdView>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

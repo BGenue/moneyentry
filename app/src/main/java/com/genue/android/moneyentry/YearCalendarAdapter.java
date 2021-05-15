@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -81,6 +82,34 @@ public class YearCalendarAdapter extends BaseAdapter
 			convertView = inflater.inflate(R.layout.calendar_item, null);
 			convertView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,(int) row_height));
 		}
+
+//		convertView.setOnTouchListener(new View.OnTouchListener()
+//		{
+//			@Override
+//			public boolean onTouch(View view, MotionEvent motionEvent)
+//			{
+//				Log.d(">>>", " onTouch " + motionEvent.getAction());
+//				if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+//					Log.d(">>>", "눌림");
+//					view.setBackground(mContext.getDrawable(R.drawable.calendar_item_clicked));
+//				} else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+//					Log.d(">>>", "뗌");
+//					view.setBackground(mContext.getDrawable(R.drawable.calendar_item_unclicked));
+//				}
+//				return false;
+//			}
+//		});
+//
+//		convertView.setOnClickListener(new View.OnClickListener()
+//		{
+//			@Override
+//			public void onClick(View view)
+//			{
+//			}
+//		});
+
+//		convertView.setBackground(mContext.getDrawable(R.drawable.calendar_item_click_event));
+//		convertView.setBackground(mContext.getDrawable(R.drawable.ripple_effect));
 		TextView tvNum = convertView.findViewById(R.id.tvNum);
 		TextView tvSpend = convertView.findViewById(R.id.tvSpend);
 		TextView tvSave = convertView.findViewById(R.id.tvSave);
@@ -99,4 +128,6 @@ public class YearCalendarAdapter extends BaseAdapter
 
 		return convertView;
 	}
+
+
 }
